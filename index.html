@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesignSync | The Daily Standup Tool for Design Ops</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#bec6e0",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f6fafe",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#7c839b",
+                    "inverse-on-surface": "#edf1f5",
+                    "primary-container": "#131b2e",
+                    "on-primary-fixed": "#131b2e",
+                    "outline": "#76777d",
+                    "tertiary-container": "#0b1c30",
+                    "surface": "#f6fafe",
+                    "on-surface-variant": "#45464d",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#ac2e00",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#ffdbd1",
+                    "secondary-fixed-dim": "#ffb5a0",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "primary-fixed": "#dae2fd",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2c3134",
+                    "tertiary-fixed": "#d3e4fe",
+                    "on-secondary-fixed-variant": "#862200",
+                    "surface-container-low": "#f0f4f8",
+                    "secondary-container": "#d73b00",
+                    "primary": "#000000",
+                    "on-background": "#171c1f",
+                    "surface-variant": "#dfe3e7",
+                    "on-surface": "#171c1f",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "surface-container": "#eaeef2",
+                    "on-tertiary-container": "#75859d",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface-tint": "#565e74",
+                    "surface-container-highest": "#dfe3e7",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e4e9ed",
+                    "on-secondary-fixed": "#3b0900",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#000000",
+                    "background": "#f6fafe",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c6c6cd",
+                    "on-secondary-container": "#fffbff",
+                    "surface-dim": "#d6dade"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "max-width": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Geist"],
+                    "body-md": ["Geist"],
+                    "headline-xl": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-xl-mobile": ["Geist"],
+                    "label-xs": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["20px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-sm": ["13px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-xl-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-xs": ["11px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrim-overlay {
+            background-color: rgba(19, 27, 46, 0.8);
+        }
+        .action-accent-button {
+            background-color: #ff4800;
+            color: white;
+            transition: background-color 200s ease;
+        }
+        .action-accent-button:hover {
+            background-color: #d73b00;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="bg-surface sticky top-0 z-50 w-full border-b border-outline-variant transition-all duration-200 h-20">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-full">
+<div class="flex items-center gap-8">
+<a class="text-body-lg font-headline-lg font-bold text-primary after:content-['.'] after:text-secondary" href="#">DesignSync</a>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Features</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#pricing">Pricing</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="action-accent-button px-6 py-2.5 rounded-lg font-headline-lg text-label-sm text-sm font-bold transition-all duration-200 hover:opacity-90" onclick="openModal()">Get Started</button>
+</div>
+</div>
+</nav>
+<main class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-24">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center mb-32">
+<div class="flex flex-col items-start gap-8">
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm px-4 py-1.5 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+                    Built specifically for Slack &amp; Discord design workflows
+                </div>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-primary max-w-xl">
+                    Finally, a daily standup tool built for design teams.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Stop wasting time answering generic questions. Get clear visibility on design progress, prototype status, and review blockers every single day.
+                </p>
+<form class="flex flex-col sm:flex-row w-full max-w-lg gap-3" onsubmit="event.preventDefault(); openModal();">
+<input class="flex-grow bg-surface-container-lowest border border-outline-variant px-4 py-3.5 rounded-lg focus:ring-2 focus:ring-secondary-container focus:border-secondary outline-none font-label-sm text-label-sm transition-all" placeholder="Enter your work email" required="" type="email"/>
+<button class="action-accent-button px-8 py-3.5 rounded-lg font-bold font-headline-lg text-label-sm whitespace-nowrap shadow-md active:scale-[0.98] transition-transform" type="submit">
+                        Start Your Free 14-Day Trial
+                    </button>
+</form>
+</div>
+<div class="relative group">
+<!-- Hero Visual: Simulated Slack Card -->
+<div class="bg-white border border-outline-variant p-6 rounded-xl shadow-xl transform group-hover:translate-y-[-4px] transition-transform duration-500">
+<div class="flex items-center gap-3 border-b border-outline-variant pb-4 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">alternate_email</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Daily Standup Bot</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-widest">DesignSync Integration</p>
+</div>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<p class="font-label-sm text-label-sm text-secondary uppercase font-bold">Review Status</p>
+<div class="flex items-center gap-2 bg-surface-container-low p-3 rounded border border-outline-variant">
+<span class="material-symbols-outlined text-secondary">link</span>
+<span class="font-body-md text-on-surface-variant italic">figma.com/file/marketing-site-v2...</span>
+</div>
+</div>
+<div class="space-y-2">
+<p class="font-label-sm text-label-sm text-on-surface uppercase font-bold">Blockers</p>
+<p class="font-body-md text-on-surface-variant">Waiting on finalized copy for the pricing section from Sarah.</p>
+</div>
+<div class="flex gap-2">
+<span class="bg-primary text-white font-label-xs text-label-xs px-3 py-1 rounded">High Priority</span>
+<span class="bg-surface-variant text-on-surface font-label-xs text-label-xs px-3 py-1 rounded">In Review</span>
+</div>
+</div>
+</div>
+<!-- Abstract Decorative Elements -->
+<div class="absolute -top-12 -right-12 w-64 h-64 bg-secondary-fixed-dim/20 rounded-full blur-3xl -z-10"></div>
+</div>
+</section>
+<!-- Pain vs Solution -->
+<section class="py-24 border-t border-outline-variant">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Engineered for Design Ops</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Generic standup bots ask engineer-focused questions. We focus on the design lifecycle.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Problem -->
+<div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant space-y-6">
+<div class="flex items-center gap-4 text-error">
+<span class="material-symbols-outlined text-[32px]">cancel</span>
+<h3 class="font-headline-lg text-body-lg font-bold">Generic Standup Bots</h3>
+</div>
+<ul class="space-y-4 font-body-md text-on-surface-variant">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error-container bg-error p-0.5 rounded-full text-[14px] mt-1">close</span>
+                            "What did you do yesterday?" (No Figma link support)
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error-container bg-error p-0.5 rounded-full text-[14px] mt-1">close</span>
+                            Blockers described in code jargon, not visual status
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error-container bg-error p-0.5 rounded-full text-[14px] mt-1">close</span>
+                            No way to track Prototype vs Production readiness
+                        </li>
+</ul>
+</div>
+<!-- Solution -->
+<div class="bg-primary-container p-8 rounded-xl border-2 border-secondary space-y-6 text-white shadow-lg">
+<div class="flex items-center gap-4 text-secondary-fixed">
+<span class="material-symbols-outlined text-[32px]">check_circle</span>
+<h3 class="font-headline-lg text-body-lg font-bold">DesignSync</h3>
+</div>
+<ul class="space-y-4 font-body-md text-on-primary-fixed-dim">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary bg-white p-0.5 rounded-full text-[14px] mt-1">check</span>
+                            Automatic Figma preview parsing from standup notes
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary bg-white p-0.5 rounded-full text-[14px] mt-1">check</span>
+                            Status tags: "Review Required", "Handoff Ready", "Draft"
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary bg-white p-0.5 rounded-full text-[14px] mt-1">check</span>
+                            Dedicated Design Lead Dashboard with burndown visuals
+                        </li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Feature Grid -->
+<section class="py-24">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Feature 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover:border-secondary transition-colors group">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-6 text-primary group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">question_answer</span>
+</div>
+<h4 class="font-headline-lg text-body-lg font-bold mb-4">Design-First Questions</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Ask about prototype links, user testing results, and interaction patterns instead of just "tasks."</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover:border-secondary transition-colors group">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-6 text-primary group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<h4 class="font-headline-lg text-body-lg font-bold mb-4">Slack &amp; Discord Native</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Your team never leaves the workspace. Updates are brief, visual, and highly contextual.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover:border-secondary transition-colors group">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-6 text-primary group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+</div>
+<h4 class="font-headline-lg text-body-lg font-bold mb-4">Lead Dashboard</h4>
+<p class="font-body-md text-on-surface-variant text-sm">View all blockers across the whole design org in one high-fidelity canvas view.</p>
+</div>
+</div>
+</section>
+<!-- Pricing Smoke-Test -->
+<section class="py-24 flex justify-center" id="pricing">
+<div class="bg-white border-2 border-primary p-12 rounded-2xl max-w-2xl w-full text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-secondary text-white px-6 py-1 font-label-xs text-label-xs uppercase tracking-widest rounded-bl-xl">
+                    Early Access Pricing
+                </div>
+<h3 class="font-headline-xl text-headline-lg mb-4">Team Pro Plan</h3>
+<p class="text-on-surface-variant font-body-md mb-8">Unlimited designers, full Slack/Discord history, and advanced analytics.</p>
+<div class="flex items-baseline justify-center gap-2 mb-10">
+<span class="font-headline-xl text-headline-xl">$39</span>
+<span class="font-body-lg text-on-surface-variant">/month</span>
+</div>
+<ul class="text-left space-y-4 mb-10 max-w-sm mx-auto">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">check</span>
+                        Unlimited Design Channels
+                    </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">check</span>
+                        Figma &amp; Adobe XD Integrations
+                    </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">check</span>
+                        Custom Design Flow Questions
+                    </li>
+</ul>
+<button class="action-accent-button w-full py-5 rounded-xl font-headline-lg text-body-lg font-extrabold hover:scale-[1.02] active:scale-[0.98] transition-transform shadow-lg" onclick="openModal()">
+                    Claim Early Access Spot - $39/mo
+                </button>
+<p class="mt-6 font-label-xs text-label-xs text-on-surface-variant">No credit card required to reserve your spot.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto gap-gutter">
+<div class="flex flex-col gap-2">
+<span class="font-headline-lg text-body-md font-bold text-primary">DesignSync</span>
+<p class="font-label-xs text-label-xs text-on-surface-variant">© 2024 DesignSync. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-xs text-label-xs text-on-surface-variant hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="font-label-xs text-label-xs text-on-surface-variant hover:underline transition-all" href="#">Terms of Service</a>
+<a class="font-label-xs text-label-xs text-on-surface-variant hover:underline transition-all" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<!-- Smoke-Test Modal -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" id="cta-modal">
+<div class="scrim-overlay absolute inset-0" onclick="closeModal()"></div>
+<div class="bg-white rounded-xl border-2 border-primary w-full max-w-md p-8 relative z-10 shadow-2xl">
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-primary transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h3 class="font-headline-lg text-headline-lg mb-2">Claim Your Spot</h3>
+<p class="font-body-md text-on-surface-variant text-sm mb-6">We're rolling out in batches. Tell us about your team to jump the queue.</p>
+<form class="space-y-5" onsubmit="event.preventDefault(); alert('Success! We will contact you soon.'); closeModal();">
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant">Work Email</label>
+<input class="w-full border border-outline-variant p-3 rounded-lg focus:border-secondary outline-none transition-all" placeholder="alex@studio.com" required="" type="email"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant">Your Role</label>
+<select class="w-full border border-outline-variant p-3 rounded-lg focus:border-secondary outline-none bg-white transition-all">
+<option>Design Manager / Lead</option>
+<option>Product Designer</option>
+<option>Design Ops Specialist</option>
+<option>Creative Director</option>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant">Primary Workspace</label>
+<div class="flex gap-4">
+<label class="flex-1 border border-outline-variant p-3 rounded-lg flex items-center justify-center gap-2 cursor-pointer has-[:checked]:border-secondary has-[:checked]:bg-secondary-fixed">
+<input checked="" class="hidden" name="workspace" type="radio" value="slack"/>
+<span class="font-label-sm text-label-sm">Slack</span>
+</label>
+<label class="flex-1 border border-outline-variant p-3 rounded-lg flex items-center justify-center gap-2 cursor-pointer has-[:checked]:border-secondary has-[:checked]:bg-secondary-fixed">
+<input class="hidden" name="workspace" type="radio" value="discord"/>
+<span class="font-label-sm text-label-sm">Discord</span>
+</label>
+</div>
+</div>
+<button class="action-accent-button w-full py-4 rounded-lg font-bold font-headline-lg mt-4" type="submit">
+                    Join Early Access Waitlist
+                </button>
+</form>
+</div>
+</div>
+<script>
+        function openModal() {
+            document.getElementById('cta-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+        function closeModal() {
+            document.getElementById('cta-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Add visual micro-interaction for hero card
+        window.addEventListener('mousemove', (e) => {
+            const card = document.querySelector('.group > div');
+            if (!card) return;
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+    </script>
+</body></html>
